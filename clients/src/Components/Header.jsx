@@ -56,10 +56,14 @@ const Header = () => {
           <FaMoon />
         </Button>
         <Link to="/sign-in">
-          <Button className="bg-gradient-to-r from-purple-500 to-blue-500 text-white" pill>
-            Sign In
-          </Button>
-        </Link>
+  <button className="relative inline-block px-4 py-2 text-transparent bg-transparent rounded-full overflow-hidden group">
+    <span className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></span>
+    <span className="relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-500 group-hover:text-white transition duration-300 ease-in-out">
+      Sign In
+    </span>
+    <span className="absolute inset-0 bg-white rounded-full m-1 group-hover:bg-transparent transition duration-300 ease-in-out"></span>
+  </button>
+</Link>
         <Navbar.Toggle />
       </div>
 
