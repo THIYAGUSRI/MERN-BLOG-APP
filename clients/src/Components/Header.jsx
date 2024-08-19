@@ -1,13 +1,14 @@
 import React from 'react';
-import { Navbar, Button } from 'flowbite-react';
+import { Navbar, Button, Dropdown, Avatar } from 'flowbite-react';
 import { Link, useLocation } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { FaMoon } from 'react-icons/fa';
 import 'flowbite/dist/flowbite.css';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
   const { pathname } = useLocation();
-
+  const { currentUser } = useSelector(status => status.user)
   return (
     <Navbar className="border-b-2 px-4 lg:px-8">
       <Navbar.Brand href="/">
@@ -55,15 +56,43 @@ const Header = () => {
         <Button aria-label="Toggle dark mode" className="w-12 h-10" color="gray" pill>
           <FaMoon />
         </Button>
-        <Link to="/sign-in">
-  <button className="relative inline-block px-4 py-2 text-transparent bg-transparent rounded-full overflow-hidden group">
-    <span className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></span>
-    <span className="relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-500 group-hover:text-white transition duration-300 ease-in-out">
-      Sign In
-    </span>
-    <span className="absolute inset-0 bg-white rounded-full m-1 group-hover:bg-transparent transition duration-300 ease-in-out"></span>
-  </button>
-</Link>
+        {currentUser ? (
+          <Dropdown 
+          arrowIcon={false}
+          inline
+          label={
+            <Avatar 
+            alt='user'
+            img={currentUser.profilePicture}
+            rounded/>
+          }>
+              <Dropdown.Header>
+                <span className='block text-sm'>@{currentUser.username}</span>
+                <span className='block text-sm font-medium truncate'>{currentUser.email}</span>
+              </Dropdown.Header>
+              <Link to={'/dashboard?tab=profile'}>
+              <Dropdown.Item>
+                Profile
+              </Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item>
+                Sign Out
+              </Dropdown.Item>
+              </Link>
+          </Dropdown>
+        ):
+        (
+          <Link to="/sign-in">
+            <Button className="relative inline-block px-4 py-2 text-transparent bg-transparent rounded-full overflow-hidden group">
+              <span className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></span>
+                  <span className="relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-500 group-hover:text-white transition duration-300 ease-in-out">
+                     Sign In
+                  </span>
+              <span className="absolute inset-0 bg-white rounded-full m-1 group-hover:bg-transparent transition duration-300 ease-in-out"></span>
+           </Button>
+         </Link>
+        )}
+        
         <Navbar.Toggle />
       </div>
 
