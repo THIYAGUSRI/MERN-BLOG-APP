@@ -7,10 +7,11 @@ import { updateStart, updateSuccess, updateFailure, deleteUserStart, deleteUserS
 import { useDispatch } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { CircularProgressbar } from 'react-circular-progressbar';
+import { Link } from 'react-router-dom'
 import 'react-circular-progressbar/dist/styles.css';
 
 export default function DashProfile() {
-    const { currentUser, error } = useSelector(state => state.user);
+    const { currentUser, error, loading } = useSelector(state => state.user);
     const [ imageFile, setImageFile ] = useState(null);
     const [ imageFileUrl, setImageFileUrl] = useState(null);
     const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
@@ -205,10 +206,24 @@ export default function DashProfile() {
                type='submit'  
                className='w-full max-w-xs p-2 md:text-lg bg-transparent text-gray-400 
                hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500 
-               hover:text-white border border-gray-300'
-               >
-                 Update
+               hover:text-white border border-gray-300' disabled={ loading || imageFileUploading}>
+                 { loading ? 'loading...': 'Update'}
                </Button>
+               { currentUser.isAdmin && (
+                <Link to={'/create-post'}>
+                  <div className="w-full flex justify-center">
+                    <Button
+                    type='button'
+                    gradientDuoTone='purpleToPink'
+                    className='w-full max-w-lg'>
+                     Create the Post
+                    </Button>  
+                  </div>
+
+
+
+                </Link>
+               )}
             </form>
             <div className='text-red-500 flex justify-between w-full max-w-md mt-5'>
                 <span onClick={() => setShowModal(true)} className='cursor-pointer'>Delete Account</span>
