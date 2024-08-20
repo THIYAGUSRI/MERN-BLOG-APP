@@ -114,7 +114,7 @@ export default function DashProfile() {
                     type='password' 
                     id='password' 
                     placeholder='Password' 
-                    className='w-full p-2 md:p-3 lg:p-2 text-lg md:text-xl lg:text-2xl'
+                    className='w-full p-2 md:p-3 lg:p-4 text-lg md:text-xl lg:text-2xl'
                 />
                <Button 
                type='submit'  
