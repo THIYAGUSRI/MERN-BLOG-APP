@@ -10,6 +10,7 @@ import PrivateRoute from "./Components/PrivateRoute"
 import OnlyAdminPrivateRoute from "./Components/OnlyAdminPrivateRoute"
 import CreatePost from "./Pages/CreatePost"
 import UpdatePost from "./Pages/UpdatePost"
+import PostPage from "./Pages/PostPage"
 export default function App() {
   return (
     <BrowserRouter>
@@ -26,6 +27,7 @@ export default function App() {
         </Route>
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
+        <Route path='/post/:postSlug' element={<PostPage />} />
       </Routes>
       <Footer /> 
     </BrowserRouter>
