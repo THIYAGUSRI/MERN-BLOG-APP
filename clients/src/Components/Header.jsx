@@ -1,6 +1,6 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { Navbar, Button, Dropdown, Avatar } from 'flowbite-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,8 +12,20 @@ import 'flowbite/dist/flowbite.css';
 const Header = () => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { currentUser } = useSelector(state => state.user);
   const { theme } = useSelector(state => state.theme);
+  const [searchTerm, setSearchTerm] = useState('');
+  console.log(searchTerm);
+  
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParams.get('searchTerm');
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, [location.search]);
 
   const handleSignout = async () => {
     try {
@@ -31,6 +43,14 @@ const Header = () => {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set('searchTerm', searchTerm);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  };
+
   return (
     <Navbar className="border-b-2 px-4 lg:px-8">
       <Navbar.Brand href="/">
@@ -45,11 +65,15 @@ const Header = () => {
       {/* Links and Search Bar Section */}
       <div className="flex flex-grow gap-4 justify-center items-center">
         <div className="hidden lg:flex items-center max-w-md relative">
+          <form onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Search..."
-            className="w-full border rounded-lg pl-4 pr-10 py-2 focus:ring-2 focus:ring-indigo-500"
-          />
+            className="w-full border rounded-lg pl-4 pr-10 py-2 focus:ring-2 focus:ring-indigo-500 text-black"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}/>
+          </form>
+          
           <AiOutlineSearch className="absolute inset-y-0 right-3 my-auto text-gray-500" />
         </div>
         <div className="flex items-center gap-4">

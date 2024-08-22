@@ -85,7 +85,7 @@ const handleSubmit = async (e) => {
                 <Select
                 onChange={(e) =>
                     setFormData({ ...formData, category: e.target.value })}>
-                    <option value="uncategorized">Select a Category</option>
+                    <option value="uncategorized">Uncategorized</option>
                     <option value="technical domain">Technical Domain</option>
                     <option value="travel">Travel</option>
                     <option value="entertainment">Entertainment</option>
