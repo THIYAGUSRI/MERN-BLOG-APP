@@ -3,7 +3,7 @@ import React from 'react'
 export default function About() {
   return (
     <div>About
-      i hire deployment
+      i hire deployment 
     </div>
   )
 }
