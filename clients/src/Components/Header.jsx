@@ -73,7 +73,6 @@ const Header = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}/>
           </form>
-          
           <AiOutlineSearch className="absolute inset-y-0 right-3 my-auto text-gray-500" />
         </div>
         <div className="flex items-center gap-4">
@@ -93,9 +92,11 @@ const Header = () => {
       </div>
 
       {/* Mobile Search Button */}
-      <Button className="lg:hidden mr-4" color="gray" pill>
-        <AiOutlineSearch />
-      </Button>
+      <Link to='/search'>
+          <Button className="lg:hidden mr-4" color="gray" pill>
+            <AiOutlineSearch />
+            </Button>
+      </Link>
 
       {/* Actions Section */}
       <div className="flex items-center gap-4">
