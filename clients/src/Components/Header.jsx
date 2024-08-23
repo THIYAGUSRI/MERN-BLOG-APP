@@ -93,9 +93,12 @@ const Header = () => {
       </div>
 
       {/* Mobile Search Button */}
+      <Link to='/search'>
       <Button className="lg:hidden mr-4" color="gray" pill>
         <AiOutlineSearch />
       </Button>
+      </Link>
+      
 
       {/* Actions Section */}
       <div className="flex items-center gap-4">
