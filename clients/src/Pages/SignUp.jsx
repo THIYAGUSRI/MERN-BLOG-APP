@@ -14,7 +14,9 @@ export default function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(!formData.username || !formData.email || !formData.password)
-    { return setErrorMessage('Please fill out all feilds.')}
+    { 
+      return setErrorMessage('Please fill out all feilds.')
+    }
     try{
       setLoading(true);
       setErrorMessage(null);
